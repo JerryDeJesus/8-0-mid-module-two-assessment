@@ -31,9 +31,7 @@ const exampleMovies = require("./movies");
     ];
  */
 function getAllMovieTitles(movies) {
-  let movieArr = movies.map((movie) => {
-    return movie.title
-  });
+  let movieArr = movies.map( movie => movie.title);
   if(!movieArr.length){
     throw 'There are no movies in this list.'
   }
@@ -65,9 +63,7 @@ function checkIfAnyMovieHasRating(movies, rated) {
   if(!movies.length){
     throw 'There are no movies in this list.'
   }
-  return movies.some((movie) => {
-    return movie.rated === rated
-    })
+  return movies.some( movie => movie.rated === rated)
 }
 
 /**
@@ -90,7 +86,7 @@ function findById(movies, id) {
   if(!movies.length){
     throw 'There are no movies in here!'
   }
-  let grabbedMovie = movies.find((movie) => {
+  let grabbedMovie = movies.find( movie => {
     return movie.imdbID === id
   })
   if(grabbedMovie === undefined){
@@ -125,7 +121,7 @@ function filterByGenre(movies, genre) {
   if(!movies.length){
     throw 'There are no movies in here!'
   }
-  let filteredMovies =  movies.filter((movie) => {
+  let filteredMovies =  movies.filter( movie => {
     let formattedGenre = movie.genre.toLowerCase();
     return formattedGenre.includes(genre.toLowerCase())
   })
@@ -160,7 +156,7 @@ function getAllMoviesReleasedAtOrBeforeYear(movies, year) {
   if(!movies.length){
     throw 'There are no movies in here!'
   }
-  return movies.filter((movie) => {
+  return movies.filter( movie => {
     let releasedYear = Number(movie.released.slice(movie.released.length-4));
     return releasedYear <= year
   })
@@ -190,7 +186,16 @@ function getAllMoviesReleasedAtOrBeforeYear(movies, year) {
       { "James and the Giant Peach": "91%" },
     ];
  */
-function getRottenTomatoesScoreByMovie() {}
+function getRottenTomatoesScoreByMovie(movies) {
+  if(!movies.length){
+    throw 'There are no movies in here!'
+  }
+  let arr = movies.map((movie) => {
+    let rottenObj = movie.ratings.find(rating => rating.source === "Rotten Tomatoes")
+    return {[movie.title]: rottenObj.value}
+  })
+  return arr
+}
 
 // Do not change anything below this line.
 module.exports = {
