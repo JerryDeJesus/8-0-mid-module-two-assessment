@@ -66,9 +66,8 @@ function checkIfAnyMovieHasRating(movies, rated) {
     throw 'There are no movies in this list.'
   }
   return movies.some((movie) => {
-    if(movie.rated === rated){
-      return true
-    }})
+    return movie.rated === rated
+    })
 }
 
 /**
@@ -92,9 +91,7 @@ function findById(movies, id) {
     throw 'There are no movies in here!'
   }
   let grabbedMovie = movies.find((movie) => {
-    if(movie.imdbID === id){
-      return movie
-    }
+    return movie.imdbID === id
   })
   if(grabbedMovie === undefined){
     return null
@@ -125,7 +122,14 @@ function findById(movies, id) {
  *  //> []
  */
 function filterByGenre(movies, genre) {
-  
+  if(!movies.length){
+    throw 'There are no movies in here!'
+  }
+  let filteredMovies =  movies.filter((movie) => {
+    let formattedGenre = movie.genre.toLowerCase();
+    return formattedGenre.includes(genre.toLowerCase())
+  })
+  return filteredMovies
 }
 
 /**
