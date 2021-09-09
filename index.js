@@ -68,8 +68,7 @@ function checkIfAnyMovieHasRating(movies, rated) {
   return movies.some((movie) => {
     if(movie.rated === rated){
       return true
-    }
-  })
+    }})
 }
 
 /**
@@ -88,7 +87,20 @@ function checkIfAnyMovieHasRating(movies, rated) {
       // Toy Story 4
     };
  */
-function findById() {}
+function findById(movies, id) {
+  if(!movies.length){
+    throw 'There are no movies in here!'
+  }
+  let grabbedMovie = movies.find((movie) => {
+    if(movie.imdbID === id){
+      return movie
+    }
+  })
+  if(grabbedMovie === undefined){
+    return null
+  }
+  return grabbedMovie
+}
 
 /**
  * filterByGenre()
@@ -112,7 +124,9 @@ function findById() {}
  *  filterByGenre(movies, "Horror")
  *  //> []
  */
-function filterByGenre() {}
+function filterByGenre(movies, genre) {
+  
+}
 
 /**
  * getAllMoviesReleasedAtOrBeforeYear()
